@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Love in Action 愛就是行動</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Nunito:wght@500;700;800&display=swap">
+<style>
+/* Layout: a storybook desk — soft paper ground, one rounded "page" per section, stamp row as the progress spine */
+:root{
+  --paper:#FFF8F4; --card:#FFFFFF; --ink:#3A2F3B; --muted:#8B7D88; --line:#F0E1DB;
+  --rose:#E9716E; --rose-deep:#C9504E; --rose-soft:#FDE6E3;
+  --sky:#6FA9DC; --sky-soft:#E4EFFA;
+  --sun:#F5BE3F; --sun-soft:#FFF2CC;
+  --leaf:#6DB383; --leaf-soft:#E2F2E6;
+  --f-hand:"Noto Sans TC","Noto Sans SC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-zh:"Noto Sans TC","Noto Sans SC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-en:"Nunito","Noto Sans TC",system-ui,sans-serif;
+  --r:20px; --shadow:0 2px 0 var(--line),0 8px 24px rgba(201,80,78,.07);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body.simp{--f-hand:"Noto Sans SC","Noto Sans TC","PingFang SC","Microsoft YaHei",sans-serif;--f-zh:"Noto Sans SC","Noto Sans TC","PingFang SC","Microsoft YaHei",sans-serif}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--f-en);font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:12px}
+.wrap{max-width:1040px;margin:0 auto}
+
+/* tri-language text */
+.tri{display:flex;flex-direction:column;gap:2px}
+.tri .py{font-family:var(--f-en);font-size:.82em;color:var(--sky);font-weight:700;letter-spacing:.01em}
+.tri .zh{font-family:var(--f-zh);font-size:1.15em;font-weight:500}
+.tri .en{font-family:var(--f-en);font-size:.85em;color:var(--muted)}
+body.no-py .py{display:none!important}
+body.no-en .en{display:none!important}
+.gl{border-bottom:2px dotted var(--sun);cursor:help;border-radius:2px}
+.gl.core{background:var(--sun-soft);border-bottom-color:var(--sun);padding:0 2px}
+.gl:hover,.gl.on{background:var(--sun)}
+#tip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:#fff;border-radius:14px;padding:8px 12px;min-width:90px;text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);transform:translate(-50%,calc(-100% - 10px));opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip .t-zh{font-family:var(--f-hand);font-weight:700;font-size:1.5rem;line-height:1.2}
+#tip .t-py{color:#BFE0FF;font-weight:700;font-size:.9rem}
+#tip .t-en{font-size:.85rem;color:#F3E8EC}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px;border-bottom:2px dashed var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand .mark{width:40px;height:40px;border-radius:14px;background:var(--sun-soft);display:grid;place-items:center}
+.brand b{font-family:var(--f-hand);font-weight:700;font-size:1.25rem;line-height:1.1;display:block}
+.brand small{display:block;font-size:.78rem;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.seg{display:flex;background:var(--card);border-radius:999px;padding:3px;box-shadow:0 0 0 2px var(--line)}
+.seg button{padding:5px 12px;border-radius:999px;font-size:.85rem;font-weight:700;color:var(--muted);font-family:var(--f-zh)}
+.seg button.on{background:var(--rose);color:#fff}
+.tog{padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:800;box-shadow:0 0 0 2px var(--line);background:var(--card);color:var(--muted)}
+.tog.on{box-shadow:0 0 0 2px var(--sky);color:var(--sky);background:var(--sky-soft)}
+.who{display:flex;align-items:center;gap:6px;padding:5px 12px 5px 6px;border-radius:999px;background:var(--leaf-soft);font-weight:800;font-size:.85rem}
+.who .av{width:26px;height:26px;border-radius:50%;background:var(--leaf);color:#fff;display:grid;place-items:center;font-size:.8rem}
+
+/* generic */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-weight:800;background:var(--rose);color:#fff;box-shadow:0 3px 0 var(--rose-deep);transition:transform .1s}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--rose-deep)}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:0 0 0 2px var(--line),0 3px 0 var(--line)}
+.btn.sky{background:var(--sky);box-shadow:0 3px 0 #4E8BC0}
+.btn.leaf{background:var(--leaf);box-shadow:0 3px 0 #4E9466}
+.btn.sm{padding:7px 13px;font-size:.88rem}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn .lb{display:flex;flex-direction:column;line-height:1.1;text-align:left}
+.btn .lb small{font-size:.72em;opacity:.85;font-weight:700}
+.panel{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px}
+.h2{font-family:var(--f-hand);font-weight:700;font-size:1.7rem;line-height:1.2;margin:0;text-wrap:balance}
+.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--rose)}
+.ph{display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.85rem;border:2px dashed var(--line);border-radius:16px;background:repeating-linear-gradient(45deg,#FFFCFA 0 12px,#FFF6F2 12px 24px)}
+
+/* login */
+.login{min-height:80vh;display:grid;place-items:center}
+.login .panel{max-width:440px;width:100%;text-align:center;padding:36px 28px;display:flex;flex-direction:column;gap:18px;align-items:center}
+.login input{width:100%;font:inherit;font-size:1.2rem;text-align:center;padding:14px;border-radius:16px;border:2px solid var(--line);background:var(--paper);color:var(--ink)}
+.login input:focus{border-color:var(--rose);outline:none}
+
+/* home */
+.hello{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:28px 0 18px}
+.lessons{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.lcard{position:relative;text-align:left;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;display:flex;flex-direction:column;gap:10px;transition:transform .15s}
+.lcard:not(.soon):hover{transform:translateY(-3px) rotate(-.5deg)}
+.lcard .no{font-family:var(--f-hand);font-weight:700;font-size:.95rem;color:var(--rose);font-weight:700}
+.lcard .art{height:92px;border-radius:14px;display:grid;place-items:center}
+.lcard.soon{opacity:.6;cursor:default}
+.lcard .pill{align-self:flex-start;font-size:.72rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--line);color:var(--muted)}
+.lcard .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.lcard .bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.book{margin-top:28px}
+.badges{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:14px}
+.badge{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.8rem}
+.badge .disc{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--line);filter:grayscale(1);opacity:.5}
+.badge.got .disc{filter:none;opacity:1;background:var(--sun-soft);box-shadow:0 0 0 4px var(--sun)}
+
+/* lesson shell */
+.lhead{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:22px 0 16px}
+.back{width:44px;height:44px;border-radius:50%;background:var(--card);box-shadow:0 0 0 2px var(--line);display:grid;place-items:center;font-size:1.2rem}
+.lhead .tri{flex:1;min-width:200px}
+.lhead .tri .zh{font-family:var(--f-hand);font-weight:700;font-size:1.9rem;line-height:1.15}
+.stamps{display:flex;gap:6px;align-items:center}
+.stamp{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:2px dashed var(--line);color:transparent;font-weight:800;font-size:.8rem;transition:all .3s}
+.stamp.done{border:2px solid var(--rose);background:var(--rose);color:#fff;transform:rotate(-8deg)}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.nav{display:flex;flex-direction:column;gap:8px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px)}
+.nav button{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;text-align:left;background:transparent;transition:background .15s}
+.nav button:hover{background:var(--card)}
+.nav button.cur{background:var(--card);box-shadow:var(--shadow)}
+.nav .n{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--line);color:var(--muted);font-size:.9rem;transition:all .3s}
+.nav button.cur .n{background:var(--sky);color:#fff}
+.nav button.done .n{background:var(--leaf);color:#fff}
+.nav .t{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.nav .t b{font-family:var(--f-zh);font-size:.95rem}
+.nav .t small{font-size:.74rem;color:var(--muted);font-weight:700}
+.nav .t .py{font-size:.68rem;color:var(--sky);font-weight:700}
+.stage{min-width:0}
+.sec-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.sec-head .tri .zh{font-family:var(--f-hand);font-weight:700;font-size:1.6rem}
+.got{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:800;padding:5px 12px;border-radius:999px;background:var(--line);color:var(--muted)}
+.got.yes{background:var(--leaf-soft);color:#3F8456}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+
+/* S1 video */
+.screen{aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;background:#2E2733;position:relative;box-shadow:0 0 0 8px var(--card),0 0 0 10px var(--line),var(--shadow);margin:10px}
+.screen iframe{width:100%;height:100%;border:0}
+.screen .ph{position:absolute;inset:0;border:0;border-radius:0;background:radial-gradient(circle at 50% 40%,#4A3F52,#2E2733);color:#D9CDD6;gap:6px}
+.screen .play{width:64px;height:64px;border-radius:50%;background:var(--rose);display:grid;place-items:center;margin:0 auto 6px}
+.ticket{display:flex;gap:16px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.ticket .tag{background:var(--sun-soft);border-radius:14px;padding:8px 14px}
+
+/* S2 dialogue */
+.dlg{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px}
+.line-card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:18px}
+.speaker{display:flex;align-items:center;gap:10px}
+.speaker .face{width:48px;height:48px;border-radius:50%;display:grid;place-items:center}
+.bubble{background:var(--sky-soft);border-radius:22px 22px 22px 6px;padding:18px 20px;font-size:1.3rem}
+.bubble.B{background:var(--rose-soft);border-radius:22px 22px 6px 22px}
+.bubble .zh{font-size:1.6rem}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.step{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:16px;background:var(--paper);text-align:center;font-weight:800;font-size:.85rem;transition:background .15s}
+.step:hover:not([disabled]){background:var(--sun-soft)}
+.step .ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--card);box-shadow:0 0 0 2px var(--line)}
+.step.rec .ic{background:var(--rose);box-shadow:none;animation:pulse 1s infinite}
+.step[disabled]{opacity:.4;cursor:not-allowed}
+.step small{font-weight:700;color:var(--muted);font-size:.72rem}
+@keyframes pulse{50%{transform:scale(1.1)}}
+.note{font-size:.82rem;color:var(--muted);background:var(--paper);border-radius:12px;padding:10px 12px}
+.script{display:flex;flex-direction:column;gap:6px}
+.script button{display:flex;gap:10px;align-items:center;text-align:left;padding:8px 10px;border-radius:14px;font-size:.9rem;font-family:var(--f-zh)}
+.script button.cur{background:var(--card);box-shadow:var(--shadow)}
+.script .dot{flex:none;width:22px;height:22px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-size:.7rem;color:#fff;font-weight:800}
+.script button.ok .dot{background:var(--leaf)}
+
+/* S3 cards */
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:620px;margin:0 auto}
+.wcard{aspect-ratio:3/4;max-width:100%;border-radius:20px;position:relative;perspective:800px}
+.wcard .face{position:absolute;inset:0;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;backface-visibility:hidden;transition:transform .5s}
+.wcard .cback{background:var(--rose);background-image:radial-gradient(circle,rgba(255,255,255,.25) 2px,transparent 2.5px);background-size:16px 16px;box-shadow:0 4px 0 var(--rose-deep);color:#fff}
+.wcard .cback b{font-family:var(--f-hand);font-weight:700;font-size:2.4rem;width:64px;height:64px;border-radius:50%;background:var(--card);color:var(--rose);display:grid;place-items:center}
+.wcard .cfront{background:var(--card);box-shadow:var(--shadow);transform:rotateY(180deg)}
+.wcard.open .cback{transform:rotateY(-180deg)}
+.wcard.open .cfront{transform:rotateY(0)}
+.wcard .cfront .w{font-family:var(--f-hand);font-weight:700;font-size:1.7rem}
+.wcard:hover:not(.open) .cback{transform:translateY(-4px) rotate(-2deg)}
+.veil{position:fixed;inset:0;background:rgba(58,47,59,.45);z-index:40;display:grid;place-items:center;padding:20px;opacity:0;transition:opacity .25s}
+.veil.show{opacity:1}
+.big{width:min(420px,100%);max-height:90vh;overflow:auto;background:var(--card);border-radius:28px;padding:26px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;transition:transform .55s cubic-bezier(.2,.9,.3,1.2)}
+.big .art{width:150px;height:150px;border-radius:24px;display:grid;place-items:center}
+.big .w{font-family:var(--f-hand);font-weight:700;font-size:3.4rem;line-height:1}
+.big .ex{width:100%;background:var(--paper);border-radius:16px;padding:14px;text-align:left}
+.big .ex .eyebrow{margin-bottom:4px}
+
+/* S4 characters */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip-ch{width:52px;height:52px;border-radius:14px;background:var(--card);box-shadow:0 0 0 2px var(--line);font-family:var(--f-hand);font-weight:700;font-size:1.6rem;position:relative}
+.chip-ch.cur{background:var(--sky);color:#fff;box-shadow:0 3px 0 #4E8BC0}
+.chip-ch.seen::after{content:"✓";position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:var(--leaf);color:#fff;font-size:.7rem;font-family:var(--f-en);display:grid;place-items:center}
+.ch-view{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px}
+.evo{aspect-ratio:4/3;max-width:100%}
+.evo .stages{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.evo .stages span{background:var(--card);padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:800;color:var(--ink);font-family:var(--f-zh)}
+.ch-info{display:flex;flex-direction:column;gap:12px}
+.ch-big{display:flex;align-items:center;gap:16px}
+.ch-big .c{font-family:var(--f-hand);font-weight:700;font-size:5rem;line-height:1;width:110px;height:110px;border-radius:24px;background:var(--sun-soft);display:grid;place-items:center}
+
+/* S5 builder */
+.builder{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:20px}
+.sentence{font-family:var(--f-zh);font-size:1.6rem;display:flex;flex-wrap:wrap;align-items:center;gap:6px;line-height:2}
+.slot{min-width:120px;min-height:52px;padding:4px 10px;border-radius:14px;border:3px dashed var(--sky);background:var(--sky-soft);display:inline-flex;align-items:center;justify-content:center;font-size:1.3rem;transition:all .15s}
+.slot.pr{min-width:70px;border-color:var(--rose);background:var(--rose-soft)}
+.slot.hot{transform:scale(1.06);background:var(--sun-soft)}
+.slot.filled{border-style:solid;background:var(--card)}
+.bank{display:flex;flex-wrap:wrap;gap:12px}
+.chip{touch-action:none;user-select:none;display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:16px;background:var(--card);box-shadow:0 0 0 2px var(--line),0 3px 0 var(--line);cursor:grab;font-family:var(--f-zh)}
+.chip .mini{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--paper)}
+.chip.pron{background:var(--rose-soft);padding:8px 16px;font-size:1.3rem}
+.chip.used{opacity:.35}
+.chip .tri .zh{font-size:1.05rem}
+.dragging{position:fixed;z-index:70;pointer-events:none;transform:translate(-50%,-50%) rotate(-4deg);box-shadow:0 12px 24px rgba(0,0,0,.18)}
+.result{background:var(--leaf-soft);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.result.bad{background:var(--rose-soft)}
+.sc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.scene{display:flex;gap:16px;align-items:center;background:var(--sun-soft);border-radius:18px;padding:14px}
+.scene .art{width:112px;height:112px;flex:none;border-radius:16px;background:var(--card);display:grid;place-items:center;overflow:hidden}
+.scene .art img{width:100%;height:100%;object-fit:cover}
+.scene .ask{margin-top:10px;padding-top:10px;border-top:2px dashed rgba(58,47,59,.12)}
+.mi .zw{font-family:var(--f-zh);font-size:1.25rem;font-weight:500}
+.mi .pe{display:flex;flex-direction:column;gap:2px}
+.mi .pe .p{color:var(--sky);font-weight:800}
+.mi .pe .e{color:var(--muted);font-size:.88rem}
+.face img,.art img,.disc img,.medal img,.mini img{width:100%;height:100%;object-fit:contain;border-radius:inherit}
+.lcard .art{overflow:hidden}.lcard .art img,.scene .art img{object-fit:cover}
+.made{display:flex;gap:8px;flex-wrap:wrap}
+.made span{font-size:.8rem;font-weight:800;padding:4px 10px;border-radius:99px;background:var(--line);color:var(--muted)}
+.made span.ok{background:var(--leaf);color:#fff}
+
+/* S6 match */
+.rounds{display:flex;gap:8px;margin-bottom:12px}
+.board{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 80px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px}
+.board svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.col{display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+.mi{display:flex;align-items:center;gap:10px;min-height:64px;padding:8px 12px;border-radius:16px;background:var(--paper);box-shadow:0 0 0 2px var(--line);text-align:left;transition:all .15s}
+.mi .art{width:48px;height:48px;flex:none;border-radius:12px;display:grid;place-items:center;background:var(--card)}
+.mi.sel{box-shadow:0 0 0 3px var(--sky);background:var(--sky-soft)}
+.mi.ok{box-shadow:0 0 0 3px var(--leaf);background:var(--leaf-soft);cursor:default}
+.mi.no{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.mi .tri .zh{font-size:1.15rem}
+
+/* S7 mission */
+.mission{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.quote{font-family:var(--f-hand);font-weight:700;font-size:1.5rem;background:var(--sun-soft);border-radius:var(--r);padding:20px 22px}
+.quote .tri .zh{font-family:var(--f-hand);font-weight:700;font-size:1.6rem}
+.learned{display:flex;flex-wrap:wrap;gap:8px}
+.learned .gl-chip{background:var(--sky-soft);border-radius:12px;padding:6px 10px}
+.task{border:3px dashed var(--rose);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:12px;background:var(--card)}
+.check{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;background:var(--paper);text-align:left;font-weight:800}
+.check .box{width:32px;height:32px;border-radius:10px;box-shadow:0 0 0 2px var(--line);display:grid;place-items:center;background:var(--card);flex:none;font-size:1.1rem;color:#fff}
+.check.on .box{background:var(--leaf);box-shadow:none}
+.prayer{background:linear-gradient(180deg,#FFFDF7,var(--card));border-radius:var(--r);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;gap:12px}
+.pline{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:14px;transition:background .2s}
+.pline.on{background:var(--sun-soft)}
+.icon-btn{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--sky-soft);color:var(--sky)}
+.icon-btn:hover{background:var(--sky);color:#fff}
+
+/* toast + celebration */
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);z-index:80;background:var(--ink);color:#fff;border-radius:999px;padding:10px 18px;font-weight:800;display:flex;gap:8px;align-items:center;transition:transform .3s;max-width:calc(100% - 32px)}
+#toast.show{transform:translate(-50%,0)}
+.cele{text-align:center}
+.cele .medal{width:140px;height:140px;border-radius:50%;background:var(--sun-soft);box-shadow:0 0 0 8px var(--sun),0 0 0 14px var(--sun-soft);display:grid;place-items:center;margin:10px auto 18px;animation:pop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.2) rotate(-30deg)}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:45}
+
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .nav{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px;gap:6px}
+  .nav button{flex:none;flex-direction:column;gap:4px;padding:8px;min-width:76px;text-align:center}
+  .nav .t small,.nav .t .py{display:none}
+  .nav .t b{font-size:.78rem}
+  .dlg,.ch-view,.mission{grid-template-columns:1fr}
+  .board{gap:12px 28px;padding:14px}
+}
+@media (max-width:520px){
+  .deck{grid-template-columns:repeat(2,1fr)}
+  .badges{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .sentence{font-size:1.25rem}
+  .mi .art{width:36px;height:36px}
+  .scene .art{width:76px;height:76px}
+  .h2{font-size:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/t2cn.js"></script>
+<div id="tip"></div>
+<div id="toast"></div>
+
+<script>
+/* ============ 設定 CONFIG（之後填入 GAS 後台網址） ============ */
+const CONFIG = { API_URL: "https://script.google.com/macros/s/AKfycbwt8e1qLTu5k1PzzUEcShKrVgrUXYFO35nKrgeYKdydkoLm9dU7wqY7dggxnBb5GtERnw/exec" };
+
+/* ============ 繁→簡對照表（建置時自動產生） ============ */
+const T2S_PAIRS = "亞亚來来個个們们傳传傷伤儲储內内兩两冊册別别劇剧動动務务啟启單单嗎吗圖图塊块媽妈學学將将對对師师帶带幫帮庫库張张彙汇後后從从愛爱態态懸悬換换敗败時时書书會会標标樣样檔档殼壳氣气沒没準准為为牽牵狀状瑪玛產产畫画禮礼禱祷穌稣範范簡简紀纪約约結结經经網网線线練练習习聖圣聲声聽听腳脚與与華华處处衛卫裡里見见親亲覽览設设訴诉詞词試试話话該该語语說说誰谁課课謝谢變变貝贝資资載载這这連连週周遠远選选還还邊边釋释錄录開开間间關关隻只頁页預预頭头顆颗題题願愿風风餅饼饒饶魚鱼麥麦麼么黃黄點点";
+const T2S = {}; for (let i=0;i<T2S_PAIRS.length;i+=2) T2S[T2S_PAIRS[i]] = T2S_PAIRS[i+1];
+let occ=null; try{ if(window.OpenCC) occ=OpenCC.Converter({from:"tw",to:"cn"}); }catch(e){}
+const PREVIEW=new URLSearchParams(location.search).get("preview")||"";
+
+/* ============ 介面文字（中／拼／英） ============ */
+/*DATA-START*/
+const UI = {
+  site:{zh:"聖經故事華語學堂",en:"LOVE IN ACTION · Chinese with Bible Stories"},
+  sections:[
+    {zh:"聖經短劇",py:"shèng jīng duǎn jù",en:"Bible Drama"},
+    {zh:"對話練習",py:"duì huà liàn xí",en:"Talk Practice"},
+    {zh:"詞彙卡牌",py:"cí huì kǎ pái",en:"Word Cards"},
+    {zh:"字的變化",py:"zì de biàn huà",en:"How Characters Grew"},
+    {zh:"造句練習",py:"zào jù liàn xí",en:"Build Sentences"},
+    {zh:"連連看",py:"lián lián kàn",en:"Match Up"},
+    {zh:"本週任務",py:"běn zhōu rèn wù",en:"Mission & Prayer"}
+  ],
+  hint:[
+    {zh:"看看今天的聖經故事。",py:"Kàn kan jīn tiān de Shèng jīng gù shi.",en:"Watch today's Bible story."},
+    {zh:"一句一句聽，再錄下你的聲音。",py:"Yí jù yí jù tīng, zài lù xià nǐ de shēng yīn.",en:"Listen line by line, then record your voice."},
+    {zh:"點一張卡牌，把它翻開。",py:"Diǎn yì zhāng kǎ pái, bǎ tā fān kāi.",en:"Tap a card to flip it open."},
+    {zh:"看看每個字從古到今怎麼變。",py:"Kàn kan měi ge zì cóng gǔ dào jīn zěn me biàn.",en:"See how each character changed over time."},
+    {zh:"看看情境，把詞卡拖到空格裡。",py:"Kàn kan qíng jìng, bǎ cí kǎ tuō dào kòng gé lǐ.",en:"Look at the situation, then drag word cards into the blanks."},
+    {zh:"把左邊的圖和字，連到右邊的拼音和意思。",py:"Bǎ zuǒ biān de tú hé zì, lián dào yòu biān de pīn yīn hé yì si.",en:"Connect each picture and word to its pinyin and meaning."},
+    {zh:"這禮拜試試看，然後一起禱告。",py:"Zhè lǐ bài shì shi kàn, rán hòu yì qǐ dǎo gào.",en:"Try it this week, then pray together."}
+  ]
+};
+
+/* ============ 課程資料（之後由試算表後台提供，格式相同） ============ */
+const LESSONS = [
+{
+  id:"L1", no:1, status:"published", cover:"",
+  title:{zh:"愛就是行動",py:"Ài jiù shì xíng dòng",en:"Love in Action"},
+  story:{zh:"好撒瑪利亞人",py:"Hǎo Sā mǎ lì yà rén",en:"The Good Samaritan"},
+  verse:{zh:"路加福音 10:25－37",py:"Lù jiā fú yīn",en:"Luke 10:25–37"},
+  theme:{zh:"愛、同理心、幫助別人",py:"ài, tóng lǐ xīn, bāng zhù bié rén",en:"Love, empathy, helping others"},
+  badge:{zh:"愛心徽章",py:"ài xīn huī zhāng",en:"Love Badge",icon:"heart"},
+  video:{youtubeId:""},
+  roles:{
+    A:{zh:"撒瑪利亞人",py:"Sā mǎ lì yà rén",en:"Samaritan",icon:"helper"},
+    B:{zh:"受傷的人",py:"shòu shāng de rén",en:"Hurt man",icon:"hurtface"}
+  },
+  dialogue:[
+    {side:"A",zh:"你還好嗎？",py:"Nǐ hái hǎo ma?",en:"Are you okay?",audio:""},
+    {side:"B",zh:"我不好。好痛！",py:"Wǒ bù hǎo. Hǎo tòng!",en:"I'm not okay. It hurts!",audio:""},
+    {side:"A",zh:"我看見你受傷了。我可以幫助你。",py:"Wǒ kàn jiàn nǐ shòu shāng le. Wǒ kě yǐ bāng zhù nǐ.",en:"I see you're hurt. I can help you.",audio:""},
+    {side:"B",zh:"謝謝你！",py:"Xiè xie nǐ!",en:"Thank you!",audio:""},
+    {side:"A",zh:"不客氣！",py:"Bú kè qi!",en:"You're welcome!",audio:""}
+  ],
+  vocab:[
+    {zh:"愛",py:"ài",en:"love",icon:"heart",tint:"rose",audio:"",img:"",
+      ex:{zh:"神說要愛別人。",py:"Shén shuō yào ài bié rén.",en:"God says to love others.",audio:""}},
+    {zh:"看見",py:"kàn jiàn",en:"see",icon:"eye",tint:"sky",audio:"",img:"",
+      ex:{zh:"我看見你受傷了。",py:"Wǒ kàn jiàn nǐ shòu shāng le.",en:"I see you're hurt.",audio:""}},
+    {zh:"幫助",py:"bāng zhù",en:"help",icon:"help",tint:"leaf",audio:"",img:"",
+      ex:{zh:"我可以幫助你。",py:"Wǒ kě yǐ bāng zhù nǐ.",en:"I can help you.",audio:""}},
+    {zh:"朋友",py:"péng yǒu",en:"friend",icon:"friends",tint:"sun",audio:"",img:"",
+      ex:{zh:"誰是他的好朋友？",py:"Shuí shì tā de hǎo péng yǒu?",en:"Who was his good friend?",audio:""}},
+    {zh:"願意",py:"yuàn yì",en:"willing",icon:"hand",tint:"sky",audio:"",img:"",
+      ex:{zh:"可是他願意停下來。",py:"Kě shì tā yuàn yì tíng xià lái.",en:"But he was willing to stop.",audio:""}},
+    {zh:"好",py:"hǎo",en:"good / okay",icon:"thumb",tint:"rose",audio:"",img:"",
+      ex:{zh:"你還好嗎？",py:"Nǐ hái hǎo ma?",en:"Are you okay?",audio:""}}
+  ],
+  chars:[
+    {ch:"愛",py:"ài",word:"愛",stages:["金文","小篆","楷書"],video:"",audio:"",
+      note:{zh:"「愛」的中間有一顆「心」，下面像走路的腳：帶著心，走去關心別人。",py:"「Ài」 de zhōng jiān yǒu yì kē 「xīn」, xià miàn xiàng zǒu lù de jiǎo: dài zhe xīn, zǒu qù guān xīn bié rén.",en:"愛 has a heart (心) in the middle and walking feet at the bottom: take your heart and go care for others."}},
+    {ch:"看",py:"kàn",word:"看見",stages:["小篆","楷書"],video:"",audio:"",
+      note:{zh:"上面是「手」，下面是「目」（眼睛）：把手放在眼睛上，往遠處看。",py:"Shàng miàn shì 「shǒu」, xià miàn shì 「mù」 (yǎn jīng): bǎ shǒu fàng zài yǎn jīng shàng, wǎng yuǎn chù kàn.",en:"A hand (手) on top of an eye (目): put your hand over your eyes and look far away."}},
+    {ch:"見",py:"jiàn",word:"看見",stages:["甲骨文","金文","小篆","楷書"],video:"",audio:"",
+      note:{zh:"一個人，頭上有一隻大眼睛：用眼睛看到了，就是「見」。",py:"Yí ge rén, tóu shàng yǒu yì zhī dà yǎn jīng: yòng yǎn jīng kàn dào le, jiù shì 「jiàn」.",en:"A person with a big eye on top: when your eyes see something, that is 見."}},
+    {ch:"幫",py:"bāng",word:"幫助",stages:["楷書"],video:"",audio:"",
+      note:{zh:"下面有「巾」，是一塊布；本來指鞋子兩邊的布，後來變成「幫忙」的意思。",py:"Xià miàn yǒu 「jīn」, shì yí kuài bù; běn lái zhǐ xié zi liǎng biān de bù, hòu lái biàn chéng 「bāng máng」 de yì si.",en:"巾 at the bottom is a piece of cloth. It first meant the cloth on the sides of a shoe, and later came to mean \"help.\""}},
+    {ch:"助",py:"zhù",word:"幫助",stages:["小篆","楷書"],video:"",audio:"",
+      note:{zh:"右邊是「力」，「力」本來畫的是耕田的工具：用力氣去幫別人，就是「助」。",py:"Yòu biān shì 「lì」, 「lì」 běn lái huà de shì gēng tián de gōng jù: yòng lì qi qù bāng bié rén, jiù shì 「zhù」.",en:"力 on the right was first a farming tool: using your strength to help others is 助."}},
+    {ch:"朋",py:"péng",word:"朋友",stages:["甲骨文","金文","楷書"],video:"",audio:"",
+      note:{zh:"本來是兩串貝殼串在一起；常常在一起的人，就是「朋」。",py:"Běn lái shì liǎng chuàn bèi ké chuàn zài yì qǐ; cháng cháng zài yì qǐ de rén, jiù shì 「péng」.",en:"It was first two strings of shells tied together. People who are often together are 朋."}},
+    {ch:"友",py:"yǒu",word:"朋友",stages:["甲骨文","金文","小篆","楷書"],video:"",audio:"",
+      note:{zh:"兩隻手在一起：朋友會手牽手、互相幫忙。",py:"Liǎng zhī shǒu zài yì qǐ: péng yǒu huì shǒu qiān shǒu, hù xiāng bāng máng.",en:"Two hands together: friends hold hands and help each other."}},
+    {ch:"願",py:"yuàn",word:"願意",stages:["小篆","楷書"],video:"",audio:"",
+      note:{zh:"右邊的「頁」本來畫的是一個人的頭，左邊的「原」告訴我們它怎麼念。",py:"Yòu biān de 「yè」 běn lái huà de shì yí ge rén de tóu, zuǒ biān de 「yuán」 gào sù wǒ men tā zěn me niàn.",en:"頁 on the right was first a picture of a head. 原 on the left tells us how to say it."}},
+    {ch:"意",py:"yì",word:"願意",stages:["小篆","楷書"],video:"",audio:"",
+      note:{zh:"上面是「音」（聲音），下面是「心」：心裡的聲音，就是你的想法。",py:"Shàng miàn shì 「yīn」 (shēng yīn), xià miàn shì 「xīn」: xīn lǐ de shēng yīn, jiù shì nǐ de xiǎng fǎ.",en:"音 (sound) on top and 心 (heart) below: the voice in your heart is your idea."}},
+    {ch:"好",py:"hǎo",word:"好",stages:["甲骨文","金文","小篆","楷書"],video:"",audio:"",
+      note:{zh:"一位媽媽（女）抱著孩子（子）：媽媽和孩子在一起，好！",py:"Yí wèi mā ma (nǚ) bào zhe hái zi (zǐ): mā ma hé hái zi zài yì qǐ, hǎo!",en:"A mother (女) holding a child (子): mom and child together, good!"}}
+  ],
+  pattern:{
+    lead:{zh:"我看見",py:"Wǒ kàn jiàn",en:"I see"},
+    mid:{zh:"我可以幫助",py:"Wǒ kě yǐ bāng zhù",en:"I can help"},
+    fillers:[
+      {id:"hurt",zh:"受傷的人",py:"shòu shāng de rén",en:"the hurt man",pron:"他",icon:"hurt",
+        scene:{zh:"受傷的人倒在路邊",py:"shòu shāng de rén dǎo zài lù biān",en:"A hurt man is lying by the road"},
+        full:{zh:"我看見受傷的人。我可以幫助他。",py:"Wǒ kàn jiàn shòu shāng de rén. Wǒ kě yǐ bāng zhù tā.",en:"I see the hurt man. I can help him.",audio:""}},
+      {id:"friend",zh:"朋友",py:"péng yǒu",en:"my friend",pron:"他",icon:"fall",
+        scene:{zh:"一個朋友跌倒了",py:"yí ge péng yǒu diē dǎo le",en:"A friend fell down"},
+        full:{zh:"我看見朋友。我可以幫助他。",py:"Wǒ kàn jiàn péng yǒu. Wǒ kě yǐ bāng zhù tā.",en:"I see my friend. I can help him.",audio:""}},
+      {id:"teacher",zh:"老師",py:"lǎo shī",en:"my teacher",pron:"她",icon:"books",
+        scene:{zh:"老師搬很多書",py:"lǎo shī bān hěn duō shū",en:"The teacher is carrying lots of books"},
+        full:{zh:"我看見老師。我可以幫助她。",py:"Wǒ kàn jiàn lǎo shī. Wǒ kě yǐ bāng zhù tā.",en:"I see my teacher. I can help her.",audio:""}}
+    ],
+    ask:{zh:"你看見誰？你可以怎麼做？",py:"Nǐ kàn jiàn shuí? Nǐ kě yǐ zěn me zuò?",en:"Who do you see? What can you do?"},
+    pronouns:[{zh:"他",py:"tā",en:"him"},{zh:"她",py:"tā",en:"her"}]
+  },
+  mission:{
+    quote:{zh:"耶穌說：「你也去這樣做吧！」",py:"Yē sū shuō: 「Nǐ yě qù zhè yàng zuò ba!」",en:"Jesus said, \"Go and do the same!\""},
+    learned:["我可以幫助他","你還好嗎","謝謝你","不客氣"],
+    task:{zh:"像撒瑪利亞人一樣，看見需要幫助的人，停下來幫助他。試著用中文說一次「你還好嗎？」或「我可以幫助你」。",
+          py:"Xiàng Sā mǎ lì yà rén yí yàng, kàn jiàn xū yào bāng zhù de rén, tíng xià lái bāng zhù tā. Shì zhe yòng Zhōng wén shuō yí cì 「Nǐ hái hǎo ma?」 huò 「Wǒ kě yǐ bāng zhù nǐ」.",
+          en:"Like the Good Samaritan, when you see someone who needs help, stop and help them. Try saying \"你還好嗎？\" or \"我可以幫助你\" in Chinese."},
+    bless:{zh:"你我都可以成為別人的祝福！",py:"Nǐ wǒ dōu kě yǐ chéng wéi bié rén de zhù fú!",en:"You and I can be a blessing to others!"},
+    prayer:[
+      {zh:"親愛的天父，謝謝祢愛我。",py:"Qīn ài de Tiān fù, xiè xie nǐ ài wǒ.",en:"Dear God, thank You for loving me.",audio:""},
+      {zh:"求祢幫助我，像撒瑪利亞人一樣去愛別人、幫助別人。",py:"Qiú nǐ bāng zhù wǒ, xiàng Sā mǎ lì yà rén yí yàng qù ài bié rén, bāng zhù bié rén.",en:"Help me love and help others like the Good Samaritan.",audio:""},
+      {zh:"奉耶穌的名禱告，阿們。",py:"Fèng Yē sū de míng dǎo gào, ā men.",en:"In Jesus' name, Amen.",audio:""}
+    ]
+  }
+},
+{id:"L2",status:"soon",no:2,title:{zh:"大衛與歌利亞",py:"Dà wèi yǔ Gē lì yà",en:"David and Goliath"},badge:{zh:"勇氣徽章",py:"yǒng qì huī zhāng",en:"Courage Badge",icon:"star"}},
+{id:"L3",status:"soon",no:3,title:{zh:"五餅二魚",py:"Wǔ bǐng èr yú",en:"Five Loaves, Two Fish"},badge:{zh:"分享徽章",py:"fēn xiǎng huī zhāng",en:"Sharing Badge",icon:"fish"}},
+{id:"L4",status:"soon",no:4,title:{zh:"撒該",py:"Sā gāi",en:"Zacchaeus"},badge:{zh:"改變徽章",py:"gǎi biàn huī zhāng",en:"Change Badge",icon:"tree"}},
+{id:"L5",status:"soon",no:5,title:{zh:"約瑟與兄弟",py:"Yuē sè yǔ xiōng dì",en:"Joseph and His Brothers"},badge:{zh:"饒恕徽章",py:"ráo shù huī zhāng",en:"Forgiveness Badge",icon:"dove"}}
+];
+
+/* ============ 懸浮解釋詞庫（之後由後台「詞彙表」提供） ============ */
+const GLOSSARY = {
+  "愛":["ài","love",1],"看見":["kàn jiàn","see",1],"幫助":["bāng zhù","help",1],"朋友":["péng yǒu","friend",1],"願意":["yuàn yì","willing",1],"好":["hǎo","good / okay",1],
+  "你":["nǐ","you"],"我":["wǒ","I / me"],"他":["tā","he / him"],"她":["tā","she / her"],"祢":["nǐ","You (God)"],"還好":["hái hǎo","okay, all right"],"嗎":["ma","(question word)"],
+  "不":["bù","not"],"痛":["tòng","hurt, pain"],"受傷":["shòu shāng","get hurt"],"了":["le","(something happened)"],"可以":["kě yǐ","can, may"],"謝謝":["xiè xie","thank you"],
+  "不客氣":["bú kè qi","you're welcome"],"神":["Shén","God"],"說":["shuō","say"],"要":["yào","should, want"],"別人":["bié rén","other people"],"誰":["shuí","who"],"是":["shì","is, am, are"],
+  "的":["de","'s (belongs to)"],"可是":["kě shì","but"],"停下來":["tíng xià lái","stop"],"老師":["lǎo shī","teacher"],"人":["rén","person"],"耶穌":["Yē sū","Jesus"],
+  "撒瑪利亞人":["Sā mǎ lì yà rén","Samaritan"],"天父":["Tiān fù","Father in heaven"],"親愛的":["qīn ài de","dear"],"禱告":["dǎo gào","pray"],"阿們":["ā men","Amen"],
+  "也":["yě","also, too"],"去":["qù","go"],"這樣":["zhè yàng","like this"],"做":["zuò","do"],"吧":["ba","(let's…)"],"一樣":["yí yàng","the same"],"像":["xiàng","be like"],
+  "需要":["xū yào","need"],"中文":["Zhōng wén","Chinese"],"祝福":["zhù fú","blessing"],"成為":["chéng wéi","become"],"都":["dōu","all, both"],"求":["qiú","ask, pray for"],
+  "奉":["fèng","in (the name of)"],"名":["míng","name"],"謝謝你":["xiè xie nǐ","thank you"]
+};
+/*DATA-END*/
+
+/* ============ 簡單插圖（之後換成你提供的圖片） ============ */
+const C = {rose:"#E9716E",sky:"#6FA9DC",sun:"#F5BE3F",leaf:"#6DB383",ink:"#3A2F3B",skin:"#F6D2B8",soft:"#FFF8F4"};
+/* 素材連結：後台上傳的檔案存成 "gd:檔案ID"，一般網址也可以 */
+const fileCache={};
+const imgUrl=ref=>!ref?"":ref.startsWith("gd:")?"https://lh3.googleusercontent.com/d/"+ref.slice(3)+"=w1000":ref;
+function img(ref,alt=""){return `<img src="${esc(imgUrl(ref))}" data-ref="${esc(ref)}" alt="${esc(alt)}" onerror="imgFallback(this)">`;}
+async function apiFile(id){
+  if(fileCache[id])return fileCache[id];
+  if(!CONFIG.API_URL)return "";
+  try{const d=await (await fetch(CONFIG.API_URL+"?action=file&id="+encodeURIComponent(id))).json();
+    if(d.b64){const b=atob(d.b64),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);
+      return fileCache[id]=URL.createObjectURL(new Blob([a],{type:d.mime}));}}catch(e){}
+  return "";
+}
+async function imgFallback(el){const r=el.dataset.ref;if(!r||!r.startsWith("gd:")||el.dataset.fb)return;el.dataset.fb="1";const u=await apiFile(r.slice(3));if(u)el.src=u;}
+const ytId=v=>{v=String(v||"").trim();const m=v.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);return m?m[1]:/^[\w-]{11}$/.test(v)?v:"";};
+const status=l=>l.status||(l.active?"published":"soon");
+const isOpen=l=>status(l)==="published"||l.id===PREVIEW;
+const isShown=l=>isOpen(l)||status(l)==="soon";
+const badgeArt=(l,size)=>l.badge&&l.badge.img?img(l.badge.img):ico((l.badge&&l.badge.icon)||"heart",size);
+function kid(x,y,c,s=1){return `<g transform="translate(${x} ${y}) scale(${s})"><circle cx="0" cy="-22" r="9" fill="${C.skin}" stroke="${C.ink}" stroke-width="2"/><path d="M-9 -10 Q0 -14 9 -10 L11 12 L-11 12 Z" fill="${c}" stroke="${C.ink}" stroke-width="2" stroke-linejoin="round"/></g>`}
+function ico(name,size=64){
+  const s=(b)=>`<svg viewBox="0 0 64 64" width="${size}" height="${size}" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round">${b}</svg>`;
+  switch(name){
+    case "heart":return s(`<path d="M32 54 C10 40 6 26 13 17 C20 9 29 12 32 19 C35 12 44 9 51 17 C58 26 54 40 32 54Z" fill="${C.rose}" stroke="${C.ink}" stroke-width="2.5"/><path d="M20 22 Q22 18 26 18" stroke="#fff" stroke-width="3"/>`);
+    case "eye":return s(`<path d="M6 32 Q32 8 58 32 Q32 56 6 32Z" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><circle cx="32" cy="32" r="10" fill="${C.sky}" stroke="${C.ink}" stroke-width="2.5"/><circle cx="32" cy="32" r="4" fill="${C.ink}"/><circle cx="35" cy="29" r="2" fill="#fff"/>`);
+    case "help":return s(`${kid(20,40,C.leaf)}<g transform="translate(44 46) rotate(-18)">${kid(0,0,C.sky,.85)}</g><path d="M28 34 L38 36" stroke="${C.ink}" stroke-width="3"/>`);
+    case "friends":return s(`${kid(20,42,C.sun)}${kid(44,42,C.rose)}<path d="M29 38 Q32 42 35 38" stroke="${C.ink}" stroke-width="3"/>`);
+    case "hand":return s(`${kid(32,46,C.sky)}<path d="M41 36 L48 14" stroke="${C.ink}" stroke-width="3"/><circle cx="48" cy="12" r="4" fill="${C.skin}" stroke="${C.ink}" stroke-width="2"/><path d="M52 6 l3 -3 M54 12 h4" stroke="${C.sun}" stroke-width="2.5"/>`);
+    case "thumb":return s(`<rect x="14" y="28" width="30" height="24" rx="8" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><path d="M24 28 L28 10 Q34 8 34 16 L33 28" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><path d="M20 36 H38 M20 44 H38" stroke="${C.ink}" stroke-width="2"/><path d="M50 14 l4 -4 M52 22 h6" stroke="${C.rose}" stroke-width="2.5"/>`);
+    case "hurt":return s(`<path d="M4 54 H60" stroke="${C.ink}" stroke-width="2"/><circle cx="16" cy="44" r="8" fill="${C.skin}" stroke="${C.ink}" stroke-width="2"/><rect x="24" y="40" width="30" height="12" rx="5" fill="${C.sky}" stroke="${C.ink}" stroke-width="2"/><path d="M12 38 l8 0 M16 34 l0 8" stroke="${C.rose}" stroke-width="3"/>`);
+    case "fall":return s(`<path d="M4 56 H60" stroke="${C.ink}" stroke-width="2"/><g transform="translate(30 48) rotate(-60)">${kid(0,0,C.sun,.9)}</g><path d="M48 18 l6 -4 M50 26 h8 M44 12 l2 -6" stroke="${C.rose}" stroke-width="2.5"/>`);
+    case "books":return s(`${kid(22,46,C.rose)}<rect x="32" y="16" width="22" height="8" rx="2" fill="${C.sky}" stroke="${C.ink}" stroke-width="2"/><rect x="30" y="24" width="24" height="8" rx="2" fill="${C.sun}" stroke="${C.ink}" stroke-width="2"/><rect x="33" y="32" width="20" height="8" rx="2" fill="${C.leaf}" stroke="${C.ink}" stroke-width="2"/><path d="M29 38 L33 36" stroke="${C.ink}" stroke-width="3"/>`);
+    case "helper":return s(`<circle cx="32" cy="32" r="28" fill="${C.sky}" opacity=".25"/>${kid(32,46,C.sky,1.1)}<path d="M22 16 Q32 8 42 16" stroke="${C.ink}" stroke-width="2.5" fill="${C.leaf}"/>`);
+    case "hurtface":return s(`<circle cx="32" cy="32" r="28" fill="${C.rose}" opacity=".25"/>${kid(32,46,C.rose,1.1)}<path d="M26 18 l8 0 M30 14 l0 8" stroke="#fff" stroke-width="3"/>`);
+    case "cross":return s(`<rect x="27" y="5" width="10" height="54" rx="4" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><rect x="13" y="17" width="38" height="10" rx="4" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/><path d="M32 30 C27 26 25 22 28 20 C30 18.5 31.5 19.5 32 21 C32.5 19.5 34 18.5 36 20 C39 22 37 26 32 30Z" fill="${C.rose}"/><path d="M9 9 l3 3 M55 9 l-3 3" stroke="${C.rose}" stroke-width="2.5"/>`);
+    case "star":return s(`<path d="M32 6 L39 24 L58 25 L43 37 L48 56 L32 45 L16 56 L21 37 L6 25 L25 24Z" fill="${C.sun}" stroke="${C.ink}" stroke-width="2.5"/>`);
+    case "fish":return s(`<path d="M8 32 Q28 12 48 32 Q28 52 8 32Z" fill="${C.sky}" stroke="${C.ink}" stroke-width="2.5"/><path d="M48 32 L58 22 L58 42Z" fill="${C.sky}" stroke="${C.ink}" stroke-width="2.5"/><circle cx="20" cy="30" r="2.5" fill="${C.ink}"/>`);
+    case "tree":return s(`<rect x="28" y="36" width="8" height="20" fill="#B9855B" stroke="${C.ink}" stroke-width="2"/><circle cx="32" cy="26" r="18" fill="${C.leaf}" stroke="${C.ink}" stroke-width="2.5"/>`);
+    case "dove":return s(`<path d="M8 36 Q24 20 40 30 Q48 18 58 22 Q50 26 50 34 Q40 50 18 44 Z" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><path d="M24 36 Q32 26 42 32" stroke="${C.sky}" stroke-width="2.5"/>`);
+    case "play":return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><path d="M8 5 L19 12 L8 19Z" fill="currentColor"/></svg>`;
+    case "ear":return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>`;
+    case "mic":return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>`;
+    case "me":return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>`;
+    case "compare":return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 4v16M17 4v16M3 8l4-4 4 4M13 16l4 4 4-4"/></svg>`;
+  }
+  return "";
+}
+const tintBg = t=>({rose:"var(--rose-soft)",sky:"var(--sky-soft)",leaf:"var(--leaf-soft)",sun:"var(--sun-soft)"}[t]||"var(--paper)");
+
+/* ============ 狀態與儲存 ============ */
+const KEY="lia_v1";
+let S = {nick:"",script:"trad",py:true,en:true,view:"login",lesson:"L1",sec:0,prog:{}};
+try{const raw=localStorage.getItem(KEY); if(raw) Object.assign(S,JSON.parse(raw));}catch(e){}
+if(S.nick && S.view==="login") S.view="home";
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function P(lid){const k=S.nick+"|"+lid; if(!S.prog[k]) S.prog[k]={done:[],data:{}}; return S.prog[k];}
+const L = ()=>LESSONS.find(l=>l.id===S.lesson);
+
+/* 學習紀錄：之後送到 GAS 後台 */
+function logEvent(type,detail={}){
+  const row={time:new Date().toISOString(),nick:S.nick,lesson:S.lesson,type,...detail};
+  if(!CONFIG.API_URL) return;
+  try{fetch(CONFIG.API_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({action:"log",row})});}catch(e){}
+}
+
+/* ============ 文字工具 ============ */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cv=s=>S.script!=="simp"?String(s):occ?occ(String(s)):[...String(s)].map(c=>T2S[c]||c).join("");
+let GKEYS=Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length);
+function seg(zh){
+  let out="",i=0;
+  while(i<zh.length){
+    const k=GKEYS.find(k=>zh.startsWith(k,i));
+    if(k){const g=GLOSSARY[k];out+=`<span class="gl${g[2]?" core":""}" data-g="${esc(k)}" tabindex="0">${esc(cv(k))}</span>`;i+=k.length;}
+    else{out+=esc(cv(zh[i]));i++;}
+  }
+  return out;
+}
+function tri(o,{tag="div",cls="",gloss=true}={}){
+  return `<${tag} class="tri ${cls}">${o.py?`<span class="py">${esc(o.py)}</span>`:""}<span class="zh">${gloss?seg(o.zh):esc(cv(o.zh))}</span>${o.en?`<span class="en">${esc(o.en)}</span>`:""}</${tag}>`;
+}
+
+/* ============ 聲音：有音檔用音檔，沒有就先用語音合成 ============ */
+let cur=null;
+function stopAll(){try{speechSynthesis.cancel()}catch(e){} if(cur){try{cur.pause()}catch(e){} cur=null;}}
+function speak(text,url){
+  stopAll();
+  return new Promise(res=>{
+    if(url){(async()=>{
+      const tryPlay=u=>new Promise(r=>{cur=new Audio(u);cur.onended=()=>r(true);cur.onerror=()=>r(false);cur.play().catch(()=>r(false));});
+      if(url.startsWith("gd:")){const id=url.slice(3);
+        if(await tryPlay(fileCache[id]||"https://drive.google.com/uc?export=download&id="+id))return res();
+        const u=await apiFile(id);if(u&&await tryPlay(u))return res();}
+      else if(await tryPlay(url))return res();
+      ttsSay(text,res);})();return;}
+    ttsSay(text,res);
+  });
+}
+function ttsSay(text,res){
+    try{
+      const u=new SpeechSynthesisUtterance(text.replace(/[「」]/g,""));
+      const v=speechSynthesis.getVoices().find(v=>/zh[-_](TW|HK)/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang));
+      if(v)u.voice=v; u.lang=v?v.lang:"zh-TW"; u.rate=.8; u.onend=res; u.onerror=res;
+      speechSynthesis.speak(u); setTimeout(res,8000);
+    }catch(e){res();}
+}
+try{speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>{};}catch(e){}
+
+/* ============ 提示、懸浮 ============ */
+const tipEl=document.getElementById("tip");
+function showTip(el){
+  const k=el.dataset.g,g=GLOSSARY[k];if(!g)return;
+  tipEl.innerHTML=`<div class="t-zh">${esc(cv(k))}</div><div class="t-py">${esc(g[0])}</div><div class="t-en">${esc(g[1])}</div>`;
+  const r=el.getBoundingClientRect();
+  tipEl.style.left=Math.min(Math.max(r.left+r.width/2,70),innerWidth-70)+"px";tipEl.style.top=r.top+"px";tipEl.classList.add("show");
+  document.querySelectorAll(".gl.on").forEach(x=>x.classList.remove("on"));el.classList.add("on");
+}
+function hideTip(){tipEl.classList.remove("show");document.querySelectorAll(".gl.on").forEach(x=>x.classList.remove("on"));}
+document.addEventListener("mouseover",e=>{const g=e.target.closest(".gl");if(g)showTip(g);else if(!e.target.closest("#tip"))hideTip();});
+document.addEventListener("focusin",e=>{const g=e.target.closest(".gl");if(g)showTip(g);});
+document.addEventListener("click",e=>{const g=e.target.closest(".gl");if(g){showTip(g);const k=g.dataset.g;speak(k);}},true);
+addEventListener("scroll",hideTip,{passive:true});
+let toastT;
+function toast(html){const t=document.getElementById("toast");t.innerHTML=html;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
+
+/* ============ 集章 ============ */
+function complete(i){
+  const p=P(S.lesson);
+  if(p.done.includes(i))return;
+  p.done.push(i);save();logEvent("section_done",{section:i+1});
+  document.querySelectorAll(`[data-stamp="${i}"]`).forEach(x=>x.classList.add("done"));
+  document.querySelectorAll(`.nav button[data-s="${i}"]`).forEach(x=>x.classList.add("done"));
+  document.querySelectorAll(".got").forEach(x=>{x.classList.add("yes");x.innerHTML=gotText(true);});
+  toast(`<span style="color:var(--sun)">●</span> ${esc(cv("得到一個印章！"))} <span style="opacity:.75">You got a stamp! (${p.done.length}/7)</span>`);
+  if(p.done.length===7)setTimeout(celebrate,700);
+}
+const gotText=y=>y?`✓ ${esc(cv("完成了"))} · Done`:`${esc(cv("完成就能拿到印章"))} · Finish to get a stamp`;
+
+function celebrate(){
+  const l=L();logEvent("badge",{badge:l.badge.en});
+  const v=document.createElement("div");v.className="veil";
+  v.innerHTML=`<div class="big cele"><div class="eyebrow">${esc(cv("恭喜你"))} · Congratulations, ${esc(S.nick)}!</div><div class="medal">${badgeArt(l,84)}</div>${tri(l.badge,{gloss:false})}<p style="margin:0;color:var(--muted)">${esc(cv("你完成了第"+l.no+"課的七個印章。"))}<br>You collected all 7 stamps.</p><button class="btn" id="cOk"><span class="lb">${esc(cv("太棒了"))}<small>Awesome</small></span></button></div>`;
+  document.body.appendChild(v);requestAnimationFrame(()=>v.classList.add("show"));confetti();
+  v.querySelector("#cOk").onclick=()=>v.remove();
+}
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const c=document.createElement("canvas");c.className="confetti";c.width=innerWidth;c.height=innerHeight;document.body.appendChild(c);
+  const x=c.getContext("2d"),cols=[C.rose,C.sky,C.sun,C.leaf];
+  const ps=Array.from({length:90},()=>({x:Math.random()*c.width,y:-20-Math.random()*200,v:2+Math.random()*3,r:Math.random()*6,s:4+Math.random()*5,c:cols[Math.random()*4|0]}));
+  let t=0;(function f(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.y+=p.v;p.x+=Math.sin((t+p.r)/12);x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.s/2,0,7);x.fill();});if(++t<220)requestAnimationFrame(f);else c.remove();})();
+}
+
+/* ============ 畫面 ============ */
+const app=document.getElementById("app");
+function render(){
+  stopAll();hideTip();
+  document.body.classList.toggle("no-py",!S.py);document.body.classList.toggle("no-en",!S.en);document.body.classList.toggle("simp",S.script==="simp");
+  document.documentElement.lang=S.script==="simp"?"zh-Hans":"zh-Hant";
+  if(S.view==="login")return renderLogin();
+  app.innerHTML=topBar()+(S.view==="home"?homeHTML():lessonHTML());
+  bindTop();
+  if(S.view==="home")bindHome();else bindLesson();
+  save();
+}
+function topBar(){
+  return `<header class="top">
+    <div class="brand"><div class="mark">${ico("cross",30)}</div><div><b>${esc(cv(UI.site.zh))}</b><small>${esc(UI.site.en)}</small></div></div>
+    <div class="seg" role="group" aria-label="Script"><button data-sc="trad" class="${S.script==="trad"?"on":""}">繁</button><button data-sc="simp" class="${S.script==="simp"?"on":""}">简</button></div>
+    <button class="tog ${S.py?"on":""}" id="tPy" aria-pressed="${S.py}">pīnyīn</button>
+    <button class="tog ${S.en?"on":""}" id="tEn" aria-pressed="${S.en}">English</button>
+    <button class="who" id="who" title="Change name"><span class="av">${esc(S.nick.slice(0,1).toUpperCase())}</span>${esc(S.nick)}</button>
+  </header>`;
+}
+function bindTop(){
+  app.querySelectorAll("[data-sc]").forEach(b=>b.onclick=()=>{S.script=b.dataset.sc;logEvent("script",{to:S.script});render();});
+  app.querySelector("#tPy").onclick=()=>{S.py=!S.py;render();};
+  app.querySelector("#tEn").onclick=()=>{S.en=!S.en;render();};
+  app.querySelector("#who").onclick=()=>{S.view="login";render();};
+}
+
+/* 登入 */
+function renderLogin(){
+  app.innerHTML=`<div class="login"><div class="panel">
+    <div class="mark" style="width:84px;height:84px;border-radius:26px;background:var(--sun-soft);display:grid;place-items:center">${ico("cross",60)}</div>
+    <div class="tri" style="align-items:center"><span class="py">Nǐ jiào shén me míng zi?</span><span class="zh" style="font-family:var(--f-hand);font-weight:700;font-size:1.9rem">${esc(cv("你叫什麼名字？"))}</span><span class="en">What's your nickname?</span></div>
+    <label for="nick" class="en" style="font-size:.85rem;color:var(--muted)">Use a nickname only, not your full name.</label>
+    <input id="nick" maxlength="16" autocomplete="off" placeholder="e.g. Lily" value="${esc(S.nick)}">
+    <button class="btn" id="go"><span class="lb">${esc(cv("開始"))} kāi shǐ<small>Let's go</small></span></button>
+  </div></div>`;
+  const i=app.querySelector("#nick"),go=()=>{const v=i.value.trim();if(!v){i.focus();return;}S.nick=v;S.view="home";logEvent("login");render();};
+  app.querySelector("#go").onclick=go;i.onkeydown=e=>{if(e.key==="Enter")go();};
+}
+
+/* 首頁 */
+function homeHTML(){
+  const cards=LESSONS.filter(isShown).map((l,ix)=>{
+    const p=isOpen(l)?P(l.id).done.length:0,tint=["rose","sky","sun","leaf"][ix%4];
+    return `<button class="lcard ${isOpen(l)?"":"soon"}" data-l="${l.id}" ${isOpen(l)?"":'aria-disabled="true"'}>
+      <span class="no">${esc(cv("第 "+l.no+" 課"))} · Lesson ${l.no}</span>
+      <span class="art" style="background:${tintBg(tint)}">${l.cover?img(l.cover):badgeArt(l,64)}</span>
+      ${tri(l.title,{tag:"span",gloss:false})}
+      ${isOpen(l)?`<span class="bar"><i style="width:${p/7*100}%"></i></span><span class="en" style="font-size:.78rem;color:var(--muted);font-weight:700">${p}/7 stamps</span>`:`<span class="pill">${esc(cv("即將推出"))} · Coming soon</span>`}
+    </button>`;}).join("");
+  const badges=LESSONS.filter(isShown).map(l=>{const got=isOpen(l)&&P(l.id).done.length===7;
+    return `<div class="badge ${got?"got":""}"><div class="disc">${badgeArt(l,44)}</div>${tri(l.badge,{gloss:false})}</div>`;}).join("");
+  return `<section class="hello"><div>${tri({zh:"你好，"+S.nick+"！",py:"Nǐ hǎo, "+S.nick+"!",en:"Hello, "+S.nick+"! Pick a lesson to start."},{gloss:false,cls:"h2"})}</div></section>
+  <div class="lessons">${cards}</div>
+  <section class="panel book"><div class="eyebrow">${esc(cv("我的徽章冊"))} · My Badge Book</div><div class="badges">${badges}</div></section>`;
+}
+function bindHome(){app.querySelectorAll(".lcard:not(.soon)").forEach(b=>b.onclick=()=>{S.lesson=b.dataset.l;S.view="lesson";logEvent("open_lesson");render();});}
+
+/* 單課外框 */
+function lessonHTML(){
+  const l=L(),p=P(l.id);
+  const stamps=UI.sections.map((_,i)=>`<span class="stamp ${p.done.includes(i)?"done":""}" data-stamp="${i}">✓</span>`).join("");
+  const nav=UI.sections.map((s,i)=>`<button data-s="${i}" class="${i===S.sec?"cur":""} ${p.done.includes(i)?"done":""}"><span class="n">${p.done.includes(i)?"✓":i+1}</span><span class="t"><span class="py">${esc(s.py)}</span><b>${esc(cv(s.zh))}</b><small>${esc(s.en)}</small></span></button>`).join("");
+  const s=UI.sections[S.sec];
+  return `<div class="lhead"><button class="back" id="home" aria-label="Back to lessons">←</button>
+    ${tri({zh:"第"+l.no+"課："+l.title.zh,py:"Dì "+["yī","èr","sān","sì","wǔ"][l.no-1]+" kè: "+l.title.py,en:"Lesson "+l.no+": "+l.title.en},{gloss:false})}
+    <div class="stamps" aria-label="Stamps">${stamps}</div></div>
+  <div class="layout"><nav class="nav" aria-label="Sections">${nav}</nav>
+    <main class="stage"><div class="sec-head">${tri({zh:s.zh,py:s.py,en:UI.hint[S.sec].en?s.en:""},{gloss:false})}<span class="got ${p.done.includes(S.sec)?"yes":""}">${gotText(p.done.includes(S.sec))}</span></div>
+      <p style="margin:-6px 0 16px">${tri(UI.hint[S.sec],{gloss:false,tag:"span"})}</p>
+      <div id="sec"></div>
+      <div class="pager"><button class="btn ghost sm" id="prev" ${S.sec===0?"disabled":""}>← ${esc(cv("上一個"))} Back</button><button class="btn sky sm" id="next" ${S.sec===6?"disabled":""}>${esc(cv("下一個"))} Next →</button></div>
+    </main></div>`;
+}
+function bindLesson(){
+  app.querySelector("#home").onclick=()=>{S.view="home";render();};
+  app.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{S.sec=+b.dataset.s;logEvent("open_section",{section:S.sec+1});render();scrollTo({top:0,behavior:"smooth"});});
+  app.querySelector("#prev").onclick=()=>{S.sec--;render();};
+  app.querySelector("#next").onclick=()=>{S.sec++;render();scrollTo({top:0,behavior:"smooth"});};
+  [s1,s2,s3,s4,s5,s6,s7][S.sec](app.querySelector("#sec"));
+}
+
+/* ① 聖經短劇 */
+function s1(el){
+  const l=L();
+  el.innerHTML=`<div class="panel">
+    <div class="eyebrow" style="margin-bottom:4px">${esc(cv("第 "+l.no+" 課"))} · Lesson ${l.no}</div>
+    <h2 class="h2" style="margin-bottom:6px">${esc(cv(l.title.zh))} <span class="en" style="font-family:var(--f-en);font-size:1rem;color:var(--muted)">${esc(l.title.en)}</span></h2>
+    <div class="screen">${ytId(l.video&&l.video.youtubeId)?`<iframe src="https://www.youtube-nocookie.com/embed/${ytId(l.video.youtubeId)}?rel=0" title="${esc(l.story.en)}" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>`:
+      `<div class="ph"><div><div class="play">${ico("play",30)}</div><b style="font-family:var(--f-zh)">${esc(cv(l.story.zh))}</b><br>${esc(cv("短劇影片放這裡"))} · Your YouTube video goes here</div></div>`}</div>
+    <div class="ticket">
+      <span class="tag">${tri(l.story,{gloss:false})}</span>
+      <span class="tag" style="background:var(--sky-soft)">${tri(l.verse,{gloss:false})}</span>
+      <span class="tag" style="background:var(--leaf-soft)">${tri(l.theme,{gloss:false})}</span>
+      <button class="btn leaf" id="watched" style="margin-left:auto"><span class="lb">${esc(cv("我看完了"))}<small>I watched it</small></span></button>
+    </div></div>`;
+  el.querySelector("#watched").onclick=()=>complete(0);
+}
+
+/* ② 對話練習 */
+let rec={mr:null,url:null,chunks:[]};
+function s2(el){
+  const l=L(),p=P(l.id);p.data.heard=p.data.heard||[];
+  let i=p.data.line||0;
+  function draw(){
+    const d=l.dialogue[i],r=l.roles[d.side];
+    el.innerHTML=`<div class="dlg"><div class="line-card">
+      <div class="speaker"><span class="face" style="background:${d.side==="A"?"var(--sky-soft)":"var(--rose-soft)"}">${r.img?img(r.img):ico(r.icon,40)}</span>${tri(r,{gloss:false})}<span style="margin-left:auto;font-weight:800;color:var(--muted)">${i+1} / ${l.dialogue.length}</span></div>
+      <div class="bubble ${d.side}">${tri(d)}</div>
+      <div class="steps">
+        <button class="step" id="b1"><span class="ic" style="color:var(--sky)">${ico("ear",22)}</span>${esc(cv("聽範例"))}<small>Listen</small></button>
+        <button class="step" id="b2"><span class="ic" style="color:var(--rose)">${ico("mic",22)}</span><span id="b2t">${esc(cv("錄音"))}</span><small id="b2s">Record</small></button>
+        <button class="step" id="b3" ${rec.url?"":"disabled"}><span class="ic" style="color:var(--leaf)">${ico("me",22)}</span>${esc(cv("聽我的"))}<small>My voice</small></button>
+        <button class="step" id="b4" ${rec.url?"":"disabled"}><span class="ic" style="color:var(--sun)">${ico("compare",22)}</span>${esc(cv("對對看"))}<small>Compare</small></button>
+      </div>
+      <p class="note" id="msg">${esc(cv("小提示：把滑鼠移到黃色底線的字上，就會看到意思。"))}<br>Tip: Point at (or tap) an underlined word to see what it means.</p>
+      <div class="pager" style="margin:0"><button class="btn ghost sm" id="lp" ${i===0?"disabled":""}>← ${esc(cv("上一句"))}</button><button class="btn sm" id="ln" ${i===l.dialogue.length-1?"disabled":""}>${esc(cv("下一句"))} →</button></div>
+    </div>
+    <div class="panel" style="padding:14px"><div class="eyebrow" style="margin:4px 8px 8px">${esc(cv("整段對話"))} · Whole talk</div><div class="script">
+      ${l.dialogue.map((x,j)=>`<button data-j="${j}" class="${j===i?"cur":""} ${p.data.heard.includes(j)?"ok":""}"><span class="dot">${p.data.heard.includes(j)?"✓":j+1}</span>${esc(cv(x.zh))}</button>`).join("")}
+    </div></div></div>`;
+    const go=j=>{resetRec();i=j;p.data.line=i;save();draw();};
+    el.querySelector("#lp").onclick=()=>go(i-1);el.querySelector("#ln").onclick=()=>go(i+1);
+    el.querySelectorAll(".script button").forEach(b=>b.onclick=()=>go(+b.dataset.j));
+    el.querySelector("#b1").onclick=async()=>{
+      if(!p.data.heard.includes(i)){p.data.heard.push(i);save();el.querySelector(`.script [data-j="${i}"]`).classList.add("ok");el.querySelector(`.script [data-j="${i}"] .dot`).textContent="✓";}
+      logEvent("listen",{line:i+1});await speak(d.zh,d.audio);
+      if(p.data.heard.length===l.dialogue.length)complete(1);
+    };
+    el.querySelector("#b2").onclick=toggleRec;
+    el.querySelector("#b3").onclick=()=>playMine();
+    el.querySelector("#b4").onclick=async()=>{await speak(d.zh,d.audio);await playMine();};
+  }
+  function resetRec(){if(rec.mr&&rec.mr.state==="recording")rec.mr.stop();rec={mr:null,url:null,chunks:[]};}
+  function playMine(){stopAll();return new Promise(r=>{if(!rec.url)return r();cur=new Audio(rec.url);cur.onended=r;cur.play().catch(r);});}
+  async function toggleRec(){
+    const b=el.querySelector("#b2"),msg=el.querySelector("#msg");
+    if(rec.mr&&rec.mr.state==="recording"){rec.mr.stop();return;}
+    try{
+      const st=await navigator.mediaDevices.getUserMedia({audio:true});
+      rec.chunks=[];rec.mr=new MediaRecorder(st);
+      rec.mr.ondataavailable=e=>rec.chunks.push(e.data);
+      rec.mr.onstop=()=>{st.getTracks().forEach(t=>t.stop());rec.url=URL.createObjectURL(new Blob(rec.chunks,{type:rec.mr.mimeType}));
+        b.classList.remove("rec");el.querySelector("#b2t").textContent=cv("再錄一次");el.querySelector("#b2s").textContent="Record again";
+        el.querySelector("#b3").disabled=false;el.querySelector("#b4").disabled=false;logEvent("record",{line:i+1});};
+      rec.mr.start();b.classList.add("rec");el.querySelector("#b2t").textContent=cv("錄音中…按一下停止");el.querySelector("#b2s").textContent="Tap to stop";
+    }catch(e){
+      msg.innerHTML=`${esc(cv("這個預覽畫面不能使用麥克風，正式網站上就可以錄音。"))}<br>The microphone is off in this preview. Recording works on the live site.`;
+      msg.style.background="var(--rose-soft)";
+    }
+  }
+  draw();
+}
+
+/* ③ 詞彙卡牌 */
+function s3(el){
+  const l=L(),p=P(l.id);p.data.flip=p.data.flip||[];
+  el.innerHTML=`<div class="deck">${l.vocab.map((v,i)=>`<button class="wcard ${p.data.flip.includes(i)?"open":""}" data-i="${i}" aria-label="Card ${i+1}">
+    <span class="face cback"><b>${i+1}</b></span>
+    <span class="face cfront" style="background:${tintBg(v.tint)}">${ico(v.icon,56)}<span class="py" style="font-size:.85rem">${esc(v.py)}</span><span class="w">${esc(cv(v.zh))}</span><span class="en" style="font-size:.8rem;color:var(--muted)">${esc(v.en)}</span></span>
+  </button>`).join("")}</div>`;
+  el.querySelectorAll(".wcard").forEach(c=>c.onclick=()=>openCard(+c.dataset.i,c));
+  function openCard(i,cardEl){
+    const v=l.vocab[i],r=cardEl.getBoundingClientRect();
+    const veil=document.createElement("div");veil.className="veil";
+    veil.innerHTML=`<div class="big" role="dialog" aria-label="${esc(v.en)}">
+      <div class="art" style="background:${tintBg(v.tint)}">${v.img?img(v.img):ico(v.icon,110)}</div>
+      ${tri({zh:v.zh,py:v.py,en:v.en},{gloss:false,cls:""}).replace('class="zh"','class="zh w"')}
+      <button class="btn sky sm" id="say">${ico("ear",18)}<span class="lb">${esc(cv("聽聽看"))}<small>Listen</small></span></button>
+      <div class="ex"><div class="eyebrow">${esc(cv("短劇裡的句子"))} · From the drama</div><div style="display:flex;gap:10px;align-items:center"><button class="icon-btn" id="sayEx" aria-label="Play sentence">${ico("ear",18)}</button>${tri(v.ex)}</div></div>
+      <button class="btn ghost sm" id="close">${esc(cv("放回去"))} · Close</button></div>`;
+    document.body.appendChild(veil);
+    const big=veil.querySelector(".big"),br=big.getBoundingClientRect();
+    big.style.transition="none";
+    big.style.transform=`translate(${r.left+r.width/2-(br.left+br.width/2)}px,${r.top+r.height/2-(br.top+br.height/2)}px) scale(${r.width/br.width}) rotateY(90deg)`;
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{big.style.transition="";big.style.transform="none";veil.classList.add("show");}));
+    setTimeout(()=>speak(v.zh,v.audio),450);
+    const close=()=>{veil.classList.remove("show");setTimeout(()=>veil.remove(),250);stopAll();
+      if(!p.data.flip.includes(i)){p.data.flip.push(i);save();cardEl.classList.add("open");logEvent("flip",{word:v.zh});}
+      if(p.data.flip.length===l.vocab.length)complete(2);};
+    veil.querySelector("#close").onclick=close;veil.onclick=e=>{if(e.target===veil)close();};
+    veil.querySelector("#say").onclick=()=>speak(v.zh,v.audio);
+    veil.querySelector("#sayEx").onclick=()=>speak(v.ex.zh,v.ex.audio);
+    veil.querySelector("#close").focus({preventScroll:true});
+    veil.addEventListener("keydown",e=>{if(e.key==="Escape")close();});
+  }
+}
+
+/* ④ 字的變化 */
+function s4(el){
+  const l=L(),p=P(l.id);p.data.seen=p.data.seen||[];
+  let i=p.data.ch||0;
+  function draw(){
+    const c=l.chars[i];
+    if(!p.data.seen.includes(i)){p.data.seen.push(i);save();logEvent("char",{ch:c.ch});}
+    el.innerHTML=`<div class="chips">${l.chars.map((x,j)=>`<button class="chip-ch ${j===i?"cur":""} ${p.data.seen.includes(j)?"seen":""}" data-j="${j}">${esc(cv(x.ch))}</button>`).join("")}</div>
+    <div class="ch-view">
+      <div class="panel" style="padding:14px">${ytId(c.video)?`<iframe class="evo" src="https://www.youtube-nocookie.com/embed/${ytId(c.video)}?rel=0" title="${esc(c.ch)}" allow="encrypted-media; picture-in-picture" allowfullscreen style="width:100%;border:0;border-radius:14px;display:block"></iframe>`:
+        `<div class="ph evo"><div><span style="font-family:var(--f-hand);font-weight:700;font-size:4rem;color:var(--ink);opacity:.35">${esc(cv(c.ch))}</span><br>${esc(cv("字形變化影片放這裡"))} · Your video goes here<div class="stages">${c.stages.map(s=>`<span>${esc(cv(s))}</span>`).join("→")}</div></div></div>`}</div>
+      <div class="panel ch-info">
+        <div class="ch-big"><span class="c">${esc(cv(c.ch))}</span><div class="tri"><span class="py" style="font-size:1.3rem">${esc(c.py)}</span><span class="en">${esc(cv("在詞語"))} in the word「${esc(cv(c.word))}」</span></div></div>
+        <button class="btn sky sm" id="narr" style="align-self:flex-start">${ico("ear",18)}<span class="lb">${esc(cv("聽解說"))}<small>Hear the story</small></span></button>
+        ${tri(c.note)}
+        <button class="btn sm" id="say" style="align-self:flex-start">${ico("mic",18)}<span class="lb">${esc(cv("跟著念"))} 「${esc(cv(c.ch))}」<small>Now you say it!</small></span></button>
+      </div></div>`;
+    el.querySelectorAll(".chip-ch").forEach(b=>b.onclick=()=>{i=+b.dataset.j;p.data.ch=i;save();draw();});
+    el.querySelector("#narr").onclick=()=>speak(c.note.zh,c.audio);
+    el.querySelector("#say").onclick=()=>speak(c.ch);
+    if(p.data.seen.length===l.chars.length)complete(3);
+  }
+  draw();
+}
+
+/* ⑤ 造句（情境題；他／她沒有標準答案） */
+function s5(el){
+  const l=L(),pt=l.pattern,p=P(l.id);p.data.built=p.data.built||[];
+  let k=p.data.sc||0,fill={who:null,pron:null};
+  function draw(){
+    const sc=pt.fillers[k],f=pt.fillers.find(x=>x.id===fill.who),pr=pt.pronouns.find(x=>x.zh===fill.pron);
+    const wrong=f&&f.id!==sc.id,ready=f&&!wrong&&pr;
+    const parts=`<span>${seg(pt.lead.zh)}</span><span class="slot ${f?"filled":""}" data-slot="who">${f?seg(f.zh):"＿＿"}</span><span>${seg("。"+pt.mid.zh)}</span><span class="slot pr ${pr?"filled":""}" data-slot="pron">${pr?seg(pr.zh):"？"}</span><span>。</span>`;
+    const out=ready?{zh:pt.lead.zh+f.zh+"。"+pt.mid.zh+pr.zh+"。",py:pt.lead.py+" "+f.py+". "+pt.mid.py+" "+pr.py+".",en:pt.lead.en+" "+f.en+". "+pt.mid.en+" "+pr.en+".",audio:f.full&&f.full.audio}:null;
+    if(ready&&!p.data.built.includes(sc.id)){p.data.built.push(sc.id);save();logEvent("build",{sentence:out.zh});}
+    el.innerHTML=`<div class="sc-tabs">${pt.fillers.map((x,j)=>`<button class="tog ${j===k?"on":""}" data-k="${j}">${p.data.built.includes(x.id)?"✓ ":""}${esc(cv("情境 "+(j+1)))} · Situation ${j+1}</button>`).join("")}</div>
+    <div class="builder">
+      <div class="scene"><span class="art">${sc.img?img(sc.img):ico(sc.icon,92)}</span>
+        <div style="min-width:0"><div class="eyebrow" style="margin-bottom:4px">${esc(cv("情境 "+(k+1)))} · Situation ${k+1}</div>${tri(sc.scene)}<div class="ask">${tri(pt.ask)}</div></div></div>
+      <div class="sentence" aria-live="polite">${parts}</div>
+      <div><div class="eyebrow" style="margin-bottom:8px">${esc(cv("你看見誰？"))} · Who do you see?</div><div class="bank">
+        ${pt.fillers.map(x=>`<div class="chip ${fill.who===x.id?"used":""}" data-type="who" data-v="${x.id}" tabindex="0" role="button"><span class="mini">${x.img?img(x.img):ico(x.icon,36)}</span>${tri({zh:x.zh,py:x.py,en:x.en},{gloss:false})}</div>`).join("")}
+      </div></div>
+      <div><div class="eyebrow" style="margin-bottom:8px">${esc(cv("你想用「他」還是「她」？"))} · Pick 他 or 她</div><div class="bank">
+        ${pt.pronouns.map(x=>`<div class="chip pron ${fill.pron===x.zh?"used":""}" data-type="pron" data-v="${x.zh}" tabindex="0" role="button">${tri(x,{gloss:false})}</div>`).join("")}
+      </div></div>
+      ${wrong?`<div class="result bad">${tri({zh:"再看看圖片，你看見的是誰？",py:"Zài kàn kan tú piàn, nǐ kàn jiàn de shì shuí?",en:"Look at the picture again. Who do you see?"},{gloss:false})}</div>`:""}
+      ${ready?`<div class="result"><div style="display:flex;gap:10px;align-items:center;min-width:0"><button class="icon-btn" id="play" aria-label="Play">${ico("ear",18)}</button>${tri(out)}</div>
+        <button class="btn sm" id="nextSc">${k<pt.fillers.length-1?esc(cv("下一個情境"))+" · Next →":esc(cv("再練一次"))+" · Again"}</button></div>`:""}
+      <div class="made">${pt.fillers.map(x=>`<span class="${p.data.built.includes(x.id)?"ok":""}">${p.data.built.includes(x.id)?"✓ ":""}${esc(cv(x.zh))}</span>`).join("")}</div>
+    </div>
+    <p class="note" style="margin-top:12px">${esc(cv("用手指或滑鼠把詞卡拖到空格，也可以直接點一下詞卡。「他」和「她」都可以選。"))}<br>Drag a card into a blank, or just tap it. You can pick either 他 or 她.</p>`;
+    el.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{k=+b.dataset.k;p.data.sc=k;save();fill={who:null,pron:null};draw();});
+    if(wrong)setTimeout(()=>{if(fill.who===f.id){fill.who=null;draw();}},1800);
+    if(ready){
+      speak(out.zh,out.audio);
+      el.querySelector("#play").onclick=()=>speak(out.zh,out.audio);
+      el.querySelector("#nextSc").onclick=()=>{k=(k+1)%pt.fillers.length;p.data.sc=k;save();fill={who:null,pron:null};draw();};
+      if(p.data.built.length===pt.fillers.length)complete(4);
+    }
+    el.querySelectorAll(".chip").forEach(bindDrag);
+  }
+  function place(type,v){fill[type]=v;draw();}
+  function bindDrag(ch){
+    ch.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();place(ch.dataset.type,ch.dataset.v);}};
+    ch.onpointerdown=e=>{
+      e.preventDefault();const sx=e.clientX,sy=e.clientY;let g=null,hot=null;
+      const mv=ev=>{
+        if(!g&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<6)return;
+        if(!g){g=ch.cloneNode(true);g.classList.add("dragging");document.body.appendChild(g);}
+        g.style.left=ev.clientX+"px";g.style.top=ev.clientY+"px";
+        const t=document.elementFromPoint(ev.clientX,ev.clientY)?.closest(".slot");
+        if(hot&&hot!==t)hot.classList.remove("hot");hot=t&&t.dataset.slot===ch.dataset.type?t:null;if(hot)hot.classList.add("hot");
+      };
+      const up=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);
+        if(!g){place(ch.dataset.type,ch.dataset.v);return;}
+        g.remove();if(hot)place(ch.dataset.type,ch.dataset.v);};
+      addEventListener("pointermove",mv);addEventListener("pointerup",up);
+    };
+  }
+  draw();
+}
+
+/* ⑥ 連連看：左邊「圖＋字」，右邊「拼音＋意思」 */
+function s6(el){
+  const l=L(),p=P(l.id);p.data.match=p.data.match||{};
+  const rounds=[
+    {key:"w",name:{zh:"詞語",en:"Words"},pairs:l.vocab.map(v=>({id:v.zh,icon:v.icon,img:v.img,tint:v.tint,zh:v.zh,py:v.py,en:v.en,audio:v.audio}))},
+    {key:"s",name:{zh:"句子",en:"Sentences"},pairs:l.pattern.fillers.map(f=>({id:f.id,icon:f.icon,img:f.img,tint:"sun",scene:f.scene,zh:f.full.zh,py:f.full.py,en:f.full.en,audio:f.full.audio}))}
+  ];
+  let r=p.data.round||0,sel=null;
+  const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+  let order=shuffle(rounds[r].pairs.map(x=>x.id));
+  function draw(){
+    const R=rounds[r],got=p.data.match[R.key]=p.data.match[R.key]||[];
+    el.innerHTML=`<div class="rounds">${rounds.map((x,j)=>`<button class="tog ${j===r?"on":""}" data-r="${j}">${(p.data.match[x.key]||[]).length===x.pairs.length?"✓ ":""}${esc(cv(x.name.zh))} · ${x.name.en}</button>`).join("")}</div>
+    <div class="board" id="board"><svg class="lines" id="lines"></svg>
+      <div class="col">${R.pairs.map(x=>`<button class="mi ${got.includes(x.id)?"ok":""}" data-side="L" data-id="${x.id}"><span class="art" style="background:${tintBg(x.tint)}">${x.img?img(x.img):ico(x.icon,40)}</span>${x.scene?tri(x.scene,{gloss:false}):`<span class="zw">${esc(cv(x.zh))}</span>`}</button>`).join("")}</div>
+      <div class="col">${order.map(id=>{const x=R.pairs.find(y=>y.id===id);return `<button class="mi ${got.includes(x.id)?"ok":""}" data-side="R" data-id="${x.id}">${x.scene?tri({zh:x.zh,py:x.py,en:x.en},{gloss:false}):`<span class="pe"><span class="p">${esc(x.py)}</span><span class="e">${esc(x.en)}</span></span>`}</button>`}).join("")}</div>
+    </div>
+    <p class="note" style="margin-top:12px">${R.key==="s"?esc(cv("先點左邊的情境，再點右邊你會說的句子。"))+"<br>Tap a situation, then tap what you would say.":esc(cv("先點左邊的圖和字，再點右邊的拼音和意思。"))+"<br>Tap a picture and word, then tap its pinyin and meaning."}</p>`;
+    el.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{r=+b.dataset.r;p.data.round=r;save();order=shuffle(rounds[r].pairs.map(x=>x.id));sel=null;draw();});
+    el.querySelectorAll(".mi").forEach(b=>b.onclick=()=>{
+      if(b.classList.contains("ok"))return;
+      const x=R.pairs.find(y=>y.id===b.dataset.id);
+      if(!sel||sel.dataset.side===b.dataset.side){el.querySelectorAll(".mi.sel").forEach(q=>q.classList.remove("sel"));sel=b;b.classList.add("sel");
+        if(b.dataset.side===(x.scene?"R":"L"))speak(x.zh,x.audio);return;}
+      if(sel.dataset.id===b.dataset.id){got.push(b.dataset.id);save();logEvent("match",{item:b.dataset.id});
+        speak(x.zh,x.audio);sel=null;draw();
+        if(rounds.every(q=>(p.data.match[q.key]||[]).length===q.pairs.length))complete(5);
+        else if(got.length===R.pairs.length)toast(`✓ ${esc(cv("這一關完成了！"))} Round complete!`);
+      }else{[sel,b].forEach(q=>{q.classList.remove("sel");q.classList.add("no");setTimeout(()=>q.classList.remove("no"),400);});sel=null;}
+    });
+    lines();
+  }
+  function lines(){
+    const b=el.querySelector("#board"),svg=el.querySelector("#lines");if(!b)return;const br=b.getBoundingClientRect();
+    const got=p.data.match[rounds[r].key]||[];
+    svg.innerHTML=got.map(id=>{const a=b.querySelector(`.mi[data-side="L"][data-id="${id}"]`).getBoundingClientRect(),c=b.querySelector(`.mi[data-side="R"][data-id="${id}"]`).getBoundingClientRect();
+      const x1=a.right-br.left,y1=a.top+a.height/2-br.top,x2=c.left-br.left,y2=c.top+c.height/2-br.top,mx=(x1+x2)/2;
+      return `<path d="M${x1} ${y1} C${mx} ${y1} ${mx} ${y2} ${x2} ${y2}" stroke="${C.leaf}" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="${x1}" cy="${y1}" r="6" fill="${C.leaf}"/><circle cx="${x2}" cy="${y2}" r="6" fill="${C.leaf}"/>`;}).join("");
+  }
+  addEventListener("resize",lines);
+  draw();
+}
+
+/* ⑦ 任務＋禱告 */
+function s7(el){
+  const l=L(),m=l.mission,p=P(l.id);
+  el.innerHTML=`<div class="mission">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="quote">${tri(m.quote)}</div>
+      <div class="panel"><div class="eyebrow" style="margin-bottom:10px">${esc(cv("今天學會的話"))} · Today you learned</div>
+        <div class="learned">${m.learned.map(x=>`<button class="gl-chip" data-say="${esc(x)}">${seg(x)}</button>`).join("")}</div></div>
+      <div class="task"><div class="eyebrow">${esc(cv("這禮拜試試看"))} · This week's mission</div>${tri(m.task)}
+        <button class="check ${p.data.task?"on":""}" id="task"><span class="box">${p.data.task?"✓":""}</span>${tri({zh:"我會試試看！",py:"Wǒ huì shì shi kàn!",en:"I will try it!"},{gloss:false})}</button>
+        ${tri(m.bless,{cls:""})}</div>
+    </div>
+    <div class="prayer"><div class="eyebrow">${esc(cv("結束禱告"))} · Closing prayer</div>
+      ${m.prayer.map((x,j)=>`<div class="pline" data-j="${j}"><button class="icon-btn" data-pj="${j}" aria-label="Play line">${ico("ear",18)}</button>${tri(x)}</div>`).join("")}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+        <button class="btn sky sm" id="all">${ico("play",16)}<span class="lb">${esc(cv("一起禱告"))}<small>Pray together</small></span></button>
+        <button class="btn" id="amen"><span class="lb">${esc(cv("阿們"))} ā men<small>Amen</small></span></button>
+      </div></div></div>`;
+  el.querySelectorAll("[data-say]").forEach(b=>b.addEventListener("click",e=>{if(!e.target.closest(".gl"))speak(b.dataset.say);}));
+  const hl=j=>el.querySelectorAll(".pline").forEach(x=>x.classList.toggle("on",+x.dataset.j===j));
+  el.querySelectorAll("[data-pj]").forEach(b=>b.onclick=async()=>{const j=+b.dataset.pj;hl(j);await speak(m.prayer[j].zh,m.prayer[j].audio);hl(-1);});
+  el.querySelector("#all").onclick=async()=>{for(let j=0;j<m.prayer.length;j++){hl(j);await speak(m.prayer[j].zh,m.prayer[j].audio);}hl(-1);};
+  el.querySelector("#task").onclick=e=>{p.data.task=!p.data.task;save();logEvent("mission",{done:p.data.task});const b=e.currentTarget;b.classList.toggle("on",p.data.task);b.querySelector(".box").textContent=p.data.task?"✓":"";};
+  el.querySelector("#amen").onclick=()=>{logEvent("amen");complete(6);};
+}
+
+/* 啟動：有後台網址就從後台抓課程資料，沒有就用上面的範例資料 */
+async function boot(){
+  if(CONFIG.API_URL){
+    app.innerHTML=`<div class="login"><div class="tri" style="align-items:center"><span class="zh">${esc(cv("課程載入中…"))}</span><span class="en">Loading lessons…</span></div></div>`;
+    try{
+      const d=await (await fetch(CONFIG.API_URL+"?action=content"+(PREVIEW?"&preview="+encodeURIComponent(PREVIEW):""))).json();
+      if(Array.isArray(d.lessons)&&d.lessons.length)LESSONS.splice(0,LESSONS.length,...d.lessons);
+      if(d.glossary){Object.keys(GLOSSARY).forEach(k=>delete GLOSSARY[k]);Object.assign(GLOSSARY,d.glossary);}
+      if(d.ui){["site","sections","hint"].forEach(k=>{if(d.ui[k])UI[k]=d.ui[k];});}
+      GKEYS=Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length);
+    }catch(e){console.warn("後台資料載入失敗，改用內建資料",e);}
+  }
+  LESSONS.forEach((l,i)=>{if(!l.no)l.no=i+1;});
+  /* 各課的詞彙自動加入懸浮解釋 */
+  LESSONS.forEach(l=>(l.vocab||[]).forEach(v=>{if(v.zh&&!GLOSSARY[v.zh])GLOSSARY[v.zh]=[v.py||"",v.en||"",1];}));
+  GKEYS=Object.keys(GLOSSARY).sort((a,b)=>b.length-a.length);
+  if(PREVIEW&&LESSONS.some(l=>l.id===PREVIEW)&&S.nick){S.lesson=PREVIEW;S.view="lesson";}
+  if(!LESSONS.some(l=>l.id===S.lesson&&isOpen(l))&&S.view==="lesson")S.view="home";
+  render();
+}
+boot();
+</script>
+
+</body>
+</html>
