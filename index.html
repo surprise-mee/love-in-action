@@ -931,8 +931,8 @@ function s2(el){
   function draw(){
     const d=l.dialogue[i],r=l.roles[d.side];
     el.innerHTML=`<div class="dlg"><div class="line-card">
-      <div class="speaker"><span class="face" style="background:${d.side==="A"?"var(--sky-soft)":"var(--rose-soft)"}">${r.img?img(r.img):ico(r.icon,40)}</span>${tri(r,{gloss:false})}<span style="margin-left:auto;font-weight:800;color:var(--muted)">${i+1} / ${l.dialogue.length}</span></div>
       ${d.img||SLOTS?`<div class="lineart">${pic(d.img,{label:cv("這一句的情境圖"),spec:"4:3 · 1200×900",icon:r.icon,size:80})}</div>`:""}
+      <div class="speaker"><span class="face" style="background:${d.side==="A"?"var(--sky-soft)":"var(--rose-soft)"}">${r.img?img(r.img):ico(r.icon,40)}</span>${tri(r,{gloss:false})}<span style="margin-left:auto;font-weight:800;color:var(--muted)">${i+1} / ${l.dialogue.length}</span></div>
       <div class="bubble ${d.side}">${tri(d)}</div>
       <div class="steps">
         <button class="step" id="b1"><span class="ic" style="color:var(--sky)">${ico("ear",22)}</span>${esc(cv("聽範例"))}<small>Listen</small></button>
