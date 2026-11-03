@@ -276,7 +276,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sart img{width:100%;height:100%;object-fit:cover}
 .sno{position:absolute;top:14px;left:14px;width:24px;height:24px;border-radius:50%;background:var(--rose);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.8rem}
 .scard .tri .zh{font-size:.95rem}.scard .tri .py{font-size:.7rem}.scard .tri .en{font-size:.75rem}
-.lineart{height:220px;border-radius:18px;overflow:hidden;display:grid;place-items:center;background:var(--paper)}
+.lineart{aspect-ratio:4/3;max-height:360px;width:100%;max-width:100%;border-radius:18px;overflow:hidden;display:grid;place-items:center;background:var(--paper)}
 .lineart img{width:100%;height:100%;object-fit:cover}
 .fimg{width:64%;aspect-ratio:1;max-width:100%;border-radius:14px;overflow:hidden;display:grid;place-items:center}
 .fimg .slotph{font-size:.6rem}
@@ -315,8 +315,8 @@ details.more[open] summary{margin-bottom:8px}
 .pclabel{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--rose)}
 .pcard .tri{align-items:center}.pcard .tri .zh{font-size:1.1rem;font-weight:700}
 .watchrow{display:flex;justify-content:flex-end;margin-top:18px}
-.wtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
-.wtile{background:var(--paper);border-radius:16px;padding:8px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;transition:box-shadow .15s}
+.wtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+.wtile{background:var(--sun-soft);border-radius:14px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;transition:box-shadow .15s}
 .wtile:hover{box-shadow:0 0 0 3px var(--sun)}
 .wart{width:100%;aspect-ratio:1;max-width:100%;border-radius:12px;overflow:hidden;display:grid;place-items:center;background:var(--card);margin-bottom:4px}
 .wart img{width:100%;height:100%;object-fit:cover}.wart .slotph{font-size:.58rem}
@@ -487,11 +487,11 @@ const LESSONS = [
     B:{zh:"受傷的人",py:"shòu shāng de rén",en:"Hurt man",icon:"hurtface"}
   },
   dialogue:[
-    {side:"A",zh:"你還好嗎？",py:"Nǐ hái hǎo ma?",en:"Are you okay?",words:["你","還好","嗎"],audio:""},
-    {side:"B",zh:"我不好。好痛！",py:"Wǒ bù hǎo. Hǎo tòng!",en:"I'm not okay. It hurts!",words:["我","不好","好痛"],audio:""},
-    {side:"A",zh:"我看見你受傷了。我可以幫助你。",py:"Wǒ kàn jiàn nǐ shòu shāng le. Wǒ kě yǐ bāng zhù nǐ.",en:"I see you're hurt. I can help you.",words:["我","看見","你","受傷了","我","可以","幫助","你"],audio:""},
-    {side:"B",zh:"謝謝你！",py:"Xiè xie nǐ!",en:"Thank you!",words:["謝謝","你"],audio:""},
-    {side:"A",zh:"不客氣！",py:"Bú kè qi!",en:"You're welcome!",words:["不客氣"],audio:""}
+    {side:"A",zh:"你還好嗎？",py:"Nǐ hái hǎo ma?",en:"Are you okay?",words:["你","還好","嗎"],img:"",audio:""},
+    {side:"B",zh:"我不好。好痛！",py:"Wǒ bù hǎo. Hǎo tòng!",en:"I'm not okay. It hurts!",words:["我","不好","好痛"],img:"",audio:""},
+    {side:"A",zh:"我看見你受傷了。我可以幫助你。",py:"Wǒ kàn jiàn nǐ shòu shāng le. Wǒ kě yǐ bāng zhù nǐ.",en:"I see you're hurt. I can help you.",words:["我","看見","你","受傷了","我","可以","幫助","你"],img:"",audio:""},
+    {side:"B",zh:"謝謝你！",py:"Xiè xie nǐ!",en:"Thank you!",words:["謝謝","你"],img:"",audio:""},
+    {side:"A",zh:"不客氣！",py:"Bú kè qi!",en:"You're welcome!",words:["不客氣"],img:"",audio:""}
   ],
   vocab:[
     {zh:"愛",py:"ài",en:"love",icon:"heart",tint:"rose",audio:"",img:"",
@@ -932,6 +932,7 @@ function s2(el){
     const d=l.dialogue[i],r=l.roles[d.side];
     el.innerHTML=`<div class="dlg"><div class="line-card">
       <div class="speaker"><span class="face" style="background:${d.side==="A"?"var(--sky-soft)":"var(--rose-soft)"}">${r.img?img(r.img):ico(r.icon,40)}</span>${tri(r,{gloss:false})}<span style="margin-left:auto;font-weight:800;color:var(--muted)">${i+1} / ${l.dialogue.length}</span></div>
+      ${d.img||SLOTS?`<div class="lineart">${pic(d.img,{label:cv("這一句的情境圖"),spec:"4:3 · 1200×900",icon:r.icon,size:80})}</div>`:""}
       <div class="bubble ${d.side}">${tri(d)}</div>
       <div class="steps">
         <button class="step" id="b1"><span class="ic" style="color:var(--sky)">${ico("ear",22)}</span>${esc(cv("聽範例"))}<small>Listen</small></button>
@@ -941,7 +942,7 @@ function s2(el){
       </div>
       <p class="note" id="msg">${esc(cv("小提示：把滑鼠移到黃色底線的字上，就會看到意思。"))}<br>Tip: Point at (or tap) an underlined word to see what it means.</p>
       <div class="pager" style="margin:0"><button class="btn ghost sm" id="lp" ${i===0?"disabled":""}>← ${esc(cv("上一句"))}</button><button class="btn sm" id="ln" ${i===l.dialogue.length-1?"disabled":""}>${esc(cv("下一句"))} →</button></div>
-      ${(()=>{const ws=lineWords(d);return ws.length?`<div class="eyebrow" style="margin-bottom:-8px">${esc(cv("這句話的詞"))} · Words in this line</div><div class="wtiles">${ws.map((w,q)=>`<button class="wtile" data-wq="${q}"><span class="wart">${pic(w.img,{label:cv("詞語圖"),spec:"800×800",icon:w.icon,size:60})}</span><span class="py">${esc(w.py)}</span><span class="wzh">${esc(cv(w.zh))}</span><span class="en">${esc(w.en)}</span></button>`).join("")}</div>`:"";})()}
+      ${(()=>{const ws=lineWords(d);return ws.length?`<div class="eyebrow" style="margin-bottom:-8px">${esc(cv("這句話的詞"))} · Words in this line</div><div class="wtiles">${ws.map((w,q)=>`<button class="wtile" data-wq="${q}"><span class="py">${esc(w.py)}</span><span class="wzh">${esc(cv(w.zh))}</span><span class="en">${esc(w.en)}</span></button>`).join("")}</div>`:"";})()}
     </div>
     <div class="panel" style="padding:14px"><div class="eyebrow" style="margin:4px 8px 8px">${esc(cv("整段對話"))} · Whole talk</div><div class="script">
       ${l.dialogue.map((x,j)=>`<button data-j="${j}" class="${j===i?"cur":""} ${p.data.heard.includes(j)?"ok":""}"><span class="dot">${p.data.heard.includes(j)?"✓":j+1}</span>${esc(cv(x.zh))}</button>`).join("")}
